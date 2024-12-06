@@ -180,7 +180,7 @@ class TestVerticalCheck:
         assert expected_winner == result
 
     @mark.it("returns False when there's no winner")
-    def test_horizontal_check_2(self, board):
+    def test_vertical_check_2(self, board):
         test_board = [
             ["x", "o"],
             ["o", "x"],
@@ -200,6 +200,21 @@ class TestVerticalCheck:
         result = board._vertical_check(test_board)
         expected_winner = False
         assert expected_winner == result
+    @mark.it("returns False when there's no winner bigger board")
+    def test_vertical_check_3(self, board):
+        test_board = [
+            [None, None, None, None, None, None, None],
+            [None, None, None, None, None, None, None],
+            [None, None, None, None, None, None, None],
+            [None, None, None, None, None, None, None],
+            [None, None, None, None, None, None, None],
+            ["x", "x", "x", "x", None, None, None],
+        ]
+        result = board._vertical_check(test_board)
+        expected_winner = False
+        assert expected_winner == result
+    
+
 
 class TestDiagonalCheckTLBR:
     @mark.it("returns the correct winner and the start")
@@ -283,7 +298,7 @@ class TestDiagonalCheckTLBR:
         assert expected_winner == result
 
     @mark.it("returns false if there's no diagonal win")
-    def test_diagonal_check_tlbr_6(self, board):
+    def test_diagonal_check_tlbr_7(self, board):
         test_board = [
             [None, None, None, "o", None, None, None],
             ["o", None, "x", None, "x", None, None],
@@ -295,6 +310,7 @@ class TestDiagonalCheckTLBR:
         result = board._diagonal_check_TLBR(test_board)
         expected_winner = False
         assert expected_winner == result
+
 
 class TestDiagonalCheckTRBL:
     @mark.it("returns the correct winner from the start")
@@ -378,5 +394,16 @@ class TestDiagonalCheckTRBL:
 
 
 class TestCheckWinner:
-    def test_check_winner(self):
-        pass
+    @mark.it("checks if there is a horizontal win")
+    def test_check_winner(self, board):
+        board.board = [
+            [None, None, None, None, None, None, None],
+            [None, None, None, None, None, None, None],
+            [None, None, None, None, None, None, None],
+            [None, None, None, None, None, None, None],
+            [None, None, None, None, None, None, None],
+            ["x", "x", "x", "x", None, None, None],
+        ]
+        pprint(board.get_board)
+        print(board.check_winner)
+

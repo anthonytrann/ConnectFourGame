@@ -57,7 +57,7 @@ class ConnectFourGame:
         counter = -1
         in_a_row = 1
         for j in range(0, len(current_board[0])):
-            counter = current_board[j][0]
+            counter = current_board[0][j]
             for i in range(len(current_board)):
                 if counter == current_board[i][j] and counter is not None:
                     in_a_row += 1
@@ -124,10 +124,10 @@ class ConnectFourGame:
     @property
     def check_winner(self):
         checks = [
-            self._horizontal_check(self.get_board),
-            self._vertical_check(self.get_board),
-            self._diagonal_check_TLBR(self.get_board),
-            self._diagonal_check_TRBL(self.get_board),
+            self._horizontal_check(self.board),
+            # self._vertical_check(self.board),
+            self._diagonal_check_TLBR(self.board),
+            self._diagonal_check_TRBL(self.board),
         ]
         if "x" in checks:
             return "x"
