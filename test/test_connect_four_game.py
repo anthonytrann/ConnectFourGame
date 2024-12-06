@@ -8,7 +8,6 @@ def board():
     return ConnectFourGame()
 
 
-@mark.context("testing Board initialisation")
 class TestBoardInitialisation:
     @mark.it("creates the initial board with None values")
     def test_board_init(self, board):
@@ -22,14 +21,12 @@ class TestBoardInitialisation:
         ]
 
 
-@mark.context("Testing get_player method")
 class TestGetPlayer:
     @mark.it("get's the current player playing - first player is 'x' ")
     def test_get_player_1(self, board):
         assert board.get_player == "x"
 
 
-@mark.context("Testing play method")
 class TestPlay:
     @mark.it("checks if the first play method call works")
     def test_play_1(self, board):
@@ -97,7 +94,6 @@ class TestPlay:
         assert returned_message == "This position '3' is full."
 
 
-@mark.context("testing if there is a horizontal win or not")
 class TestHorizontalCheck:
     @mark.it("returns the correct winner")
     def test_horizontal_check_TLBR(self, board):
@@ -139,7 +135,6 @@ class TestHorizontalCheck:
         assert expected_winner == result
 
 
-@mark.context("testing if there is a vertical win or not")
 class TestVerticalCheck:
     @mark.it("returns the correct winner")
     def test_vertical_check_TLBR(self, board):
@@ -206,10 +201,6 @@ class TestVerticalCheck:
         expected_winner = False
         assert expected_winner == result
 
-
-@mark.context(
-    "testing if there is a diagonal win or not from top left to bottom right (TLBR)"
-)
 class TestDiagonalCheckTLBR:
     @mark.it("returns the correct winner and the start")
     def test_diagonal_check_tlbr_1(self, board):
@@ -305,10 +296,6 @@ class TestDiagonalCheckTLBR:
         expected_winner = False
         assert expected_winner == result
 
-
-@mark.context(
-    "testing if there is a diagonal win or not from top right to bottom left (TRBL)"
-)
 class TestDiagonalCheckTRBL:
     @mark.it("returns the correct winner from the start")
     def test_diagonal_check_trbl_1(self, board):
