@@ -392,10 +392,25 @@ class TestDiagonalCheckTRBL:
         expected_winner = False
         assert expected_winner == result
 
+    @mark.it("checks mixed board")
+    def test_diagonal_check_trbl_7(self, board):
+        test_board = [
+            [None, None, None, None, None, None, None],
+            [None, None, None, None, None, None, None],
+            [None, None, None,  "x", None, None, None],
+            [None,  "o", None,  "o", None, None, None],
+            [None,  "x", None,  "o", None,  "x",  "o"],
+            [None,  "o",  "x",  "o",  "x",  "o",  "x"],
+
+        ]
+        result = board._diagonal_check_TRBL(test_board)
+        expected_winner = False
+        assert expected_winner == result
+
 
 class TestCheckWinner:
     @mark.it("checks if there is a horizontal win")
-    def test_check_winner(self, board):
+    def test_check_winner_1(self, board):
         board.board = [
             [None, None, None, None, None, None, None],
             [None, None, None, None, None, None, None],
@@ -404,6 +419,118 @@ class TestCheckWinner:
             [None, None, None, None, None, None, None],
             ["x", "x", "x", "x", None, None, None],
         ]
-        pprint(board.get_board)
-        print(board.check_winner)
+        assert board.check_winner == "x"
 
+        board.board = [
+            [None, None, None, None, None, None, None],
+            [None, None, None, None, None, None, None],
+            [None, None, None, None, None, None, None],
+            [None, None, None, "o", "o", "o", "o"],
+            [None, None, None, None, None, None, None],
+            [None, None, None, None, None, None, None],
+
+        ]
+        assert board.check_winner == "o"
+
+        board.board = [
+            [None, None, None, None, None, None, None],
+            [None, None, None, None, None, None, None],
+            [None, None, None, None, None, None, None],
+            [None, None, None, "o", "o", "o", "o"],
+            [None, None, None,  "x", "o", "x",  "x"],
+            [None,  "x", "o",  "x", "x", "o",  "x"],
+
+        ]
+        assert board.check_winner == "o"
+
+    @mark.it("checks if there is a vertical win")
+    def test_check_winner_2(self, board):
+        board.board = [
+            [None, None, None, None, None, None, None],
+            [None, None, None, None, None, None, None],
+            [None, None, None, None, None, "x", None],
+            [None, None, None, None, None, "x", None],
+            [None, None, None, None, None, "x", None],
+            [None, None, None, None, None, "x", None],
+        ]
+        assert board.check_winner == "x"
+
+        board.board = [
+            [None, None, "o", None, None, None, None],
+            [None, None, "o", None, None, None, None],
+            [None, None, "o", None, None, None, None],
+            [None, None, "o", None, None, None, None],
+            [None, None, None, None, None, None, None],
+            [None, None, None, None, None, None, None],
+
+        ]
+        assert board.check_winner == "o"
+
+    @mark.it("checks if there is a diagonal top-left-bottom-right win")
+    def test_check_winner_3(self, board):
+        board.board = [
+            [None, None, None, None, None, None, None],
+            [None, None, None, None, None, None, None],
+            [None, "x", None, None, None, None, None],
+            [None, None, "x", None, None, None, None],
+            [None, None, None, "x", None, None, None],
+            [None, None, None, None, "x", None, None],
+        ]
+        assert board.check_winner == "x"
+
+        board.board = [
+            [None, None, None, "o", None, None, None],
+            [None, None, None, None, "o", None, None],
+            [None, None, None, None, None, "o", None],
+            [None, None, None, None, None, None, "o"],
+            [None, None, None, None, None, None, None],
+            [None, None, None, None, None, None, None],
+
+        ]
+        assert board.check_winner == "o"
+
+    @mark.it("checks if there is a diagonal top-right-bottom-left win")
+    def test_check_winner_4(self, board):
+        board.board = [
+            [None, None, "x", None, None, None, None],
+            [None, "x", None, None, None, None, None],
+            ["x", None, None, None, None, None, "x"],
+            [None, None, None, None, None, "x", None],
+            [None, None, None, None, "x", None, None],
+            [None, None, None, "x", None, None, None],
+        ]
+        assert board.check_winner == "x"
+
+        board.board = [
+            [None, None, None, None, None, None, None],
+            [None, None, None, None, "o", None, None],
+            [None, None, None, "o", None, None, None],
+            [None, None, "o", None, None, None, None],
+            [None, "o", None, None, "o", None, None],
+            [None, None, None, "o", None, None, None],
+
+        ]
+        assert board.check_winner == "o"
+
+    @mark.it("checks if there is no winners")
+    def test_check_winner_5(self, board):
+        board.board = [
+            [None, None, None, None, None, None, None],
+            [None, None, None, None, None, None, None],
+            [None, None, None, None, None, None, None],
+            [None, None, None, None, None, None, None],
+            [None, None, None, None, None, None, None],
+            [None, None, None, None, None, None, None],
+        ]
+        assert board.check_winner is False
+
+        board.board = [
+            [None, None, None, None, None, None, None],
+            [None, None, None, None, None, None, None],
+            [None, None, None,  "x", None, None, None],
+            [None,  "o", None,  "o", None, None, None],
+            [None,  "x", None,  "o", None,  "x",  "o"],
+            [None,  "o",  "x",  "o",  "x",  "o",  "x"],
+
+        ]
+        assert board.check_winner is False

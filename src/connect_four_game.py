@@ -75,7 +75,7 @@ class ConnectFourGame:
         y = 0
         x = 0
         for counter in counters:
-            while not (x > (len(current_board[0]) - 3)):
+            while not (x > (len(current_board) - 3)):
                 while not (y > (len(current_board[0]) - 3)):
                     i = x
                     j = y
@@ -101,8 +101,9 @@ class ConnectFourGame:
         y = len(current_board[0]) - 1
         x = 0
         for counter in counters:
-            while not (x > (len(current_board[0]) - 3)):
+            while not (x > (len(current_board) - 3)):
                 while not (y < 3):
+                    print(x, y, "this is x and y")
                     i = x
                     j = y
                     counter = current_board[i][j]
@@ -110,11 +111,13 @@ class ConnectFourGame:
                         i += 1
                         j -= 1
                         if j < len(current_board[0]) and i < len(current_board):
-                            if counter == current_board[i][j] and counter is not None:
+                            if counter == current_board[i][j] and current_board[i][j] is not None:
                                 in_a_row += 1
                             else:
                                 in_a_row = 1
                             if in_a_row == 4:
+                                print(x, y)
+                                print(i, j)
                                 return counter
                     y -= 1
                 x += 1
@@ -125,10 +128,11 @@ class ConnectFourGame:
     def check_winner(self):
         checks = [
             self._horizontal_check(self.board),
-            # self._vertical_check(self.board),
+            self._vertical_check(self.board),
             self._diagonal_check_TLBR(self.board),
             self._diagonal_check_TRBL(self.board),
         ]
+        print(checks)
         if "x" in checks:
             return "x"
         elif "o" in checks:
