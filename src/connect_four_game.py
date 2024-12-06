@@ -1,12 +1,19 @@
+import logging
+
+logger = logging.getLogger(__name__)
+
+
 class ConnectFourGame:
-    
+    logging.basicConfig(
+            filename="connectFourLogs.txt", filemode="a", level=logging.INFO
+        )
     def __init__(self, rows: int = 6, columns: int = 7):
         self.board = []
         self._player_x = True
         self.winner = False
         self._max_height = rows - 1
-        self._max_width = columns - 1 
-        self._board_dict = {i : 0 for i in range(columns)}
+        self._max_width = columns - 1
+        self._board_dict = {i: 0 for i in range(columns)}
         for _ in range(rows):
             self.board.append([None for _ in range(columns)])
 
@@ -17,9 +24,9 @@ class ConnectFourGame:
     @property
     def get_player(self):
         if self._player_x is True:
-            return "x"
+            return " x"
         else:
-            return "o"
+            return " o"
 
     def play(self, position: int):
         message = ""
@@ -64,28 +71,33 @@ class ConnectFourGame:
                 if in_a_row == 4:
                     return counter
         return False
-        
 
     def _diagonal_check_TLBR(self, current_board):
-        counters = ["x", "o"]
-        in_a_row = 1
-        y = 0
-        x = 0
+        counters = [" x", " o"]
+        
         for counter in counters:
+            in_a_row = 1
+            winning_stack = []
+            y = 0
+            x = 0
             while not (x > (len(current_board) - 3)):
                 while not (y > (len(current_board[0]) - 3)):
                     i = x
                     j = y
                     counter = current_board[i][j]
+                    winning_stack.append((i, j, current_board[i][j]))
                     for _ in range(3):
                         i += 1
                         j += 1
                         if j < len(current_board[0]) and i < len(current_board):
                             if counter == current_board[i][j] and counter is not None:
                                 in_a_row += 1
+                                winning_stack.append((i, j, current_board[i][j]))
                             else:
                                 in_a_row = 1
+                                winning_stack = [(i, j, current_board[i][j])]
                             if in_a_row == 4:
+                                logger.info(winning_stack)
                                 return counter
                     y += 1
                 x += 1
@@ -93,25 +105,33 @@ class ConnectFourGame:
         return False
 
     def _diagonal_check_TRBL(self, current_board):
-        counters = ["x", "o"]
-        in_a_row = 1
-        y = len(current_board[0]) - 1
-        x = 0
+        counters = [" x", " o"]
         for counter in counters:
+            in_a_row = 1
+            winning_stack = []
+            y = len(current_board[0]) - 1
+            x = 0
             while not (x > (len(current_board) - 3)):
                 while not (y < 3):
                     i = x
                     j = y
                     counter = current_board[i][j]
+                    winning_stack.append((i, j, current_board[i][j]))
                     for _ in range(3):
                         i += 1
                         j -= 1
                         if j < len(current_board[0]) and i < len(current_board):
-                            if counter == current_board[i][j] and current_board[i][j] is not None:
+                            if (
+                                counter == current_board[i][j]
+                                and current_board[i][j] is not None
+                            ):
                                 in_a_row += 1
+                                winning_stack.append((i, j, current_board[i][j]))
                             else:
                                 in_a_row = 1
+                                winning_stack = [(i, j, current_board[i][j])]
                             if in_a_row == 4:
+                                logger.info(winning_stack)
                                 return counter
                     y -= 1
                 x += 1
@@ -126,20 +146,11 @@ class ConnectFourGame:
             self._diagonal_check_TLBR(self.board),
             self._diagonal_check_TRBL(self.board),
         ]
-        if "x" in checks:
-            return "x"
-        elif "o" in checks:
-            return "o"
+        if " x" in checks:
+            logger.info(checks)
+            return " x"
+        elif " o" in checks:
+            logger.info(checks)
+            return " o"
         else:
             return False
-
-
-
-
-# def main():
-#     game = ConnectFourGame()
-#     game.get_board
-
-
-# if __name__ == '__main__':
-#     main()
