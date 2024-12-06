@@ -1,4 +1,3 @@
-from pprint import pprint
 class ConnectFourGame:
     
     def __init__(self, rows: int = 6, columns: int = 7):
@@ -13,7 +12,6 @@ class ConnectFourGame:
 
     @property
     def get_board(self):
-        # pprint(self._board_dict)
         return self.board
 
     @property
@@ -50,7 +48,6 @@ class ConnectFourGame:
                     counter = row[i]
                 if in_a_row == 4:
                     return counter
-                # print(counter, in_a_row)
         return False
 
     def _vertical_check(self, current_board):
@@ -103,7 +100,6 @@ class ConnectFourGame:
         for counter in counters:
             while not (x > (len(current_board) - 3)):
                 while not (y < 3):
-                    print(x, y, "this is x and y")
                     i = x
                     j = y
                     counter = current_board[i][j]
@@ -116,8 +112,6 @@ class ConnectFourGame:
                             else:
                                 in_a_row = 1
                             if in_a_row == 4:
-                                print(x, y)
-                                print(i, j)
                                 return counter
                     y -= 1
                 x += 1
@@ -132,7 +126,6 @@ class ConnectFourGame:
             self._diagonal_check_TLBR(self.board),
             self._diagonal_check_TRBL(self.board),
         ]
-        print(checks)
         if "x" in checks:
             return "x"
         elif "o" in checks:

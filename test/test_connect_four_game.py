@@ -1,6 +1,5 @@
 from src.connect_four_game import ConnectFourGame
 from pytest import mark, fixture
-from pprint import pprint
 
 
 @fixture
@@ -81,7 +80,6 @@ class TestPlay:
         board.play(3)
         board.play(3)
         board.play(3)
-        # pprint(board.get_board)
         assert board.get_board == [
             [None, None, None, "o", None, None, None],
             [None, None, None, "x", None, None, None],
