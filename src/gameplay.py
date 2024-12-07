@@ -7,7 +7,6 @@ def main():
     print("\nWelcome to Connect Four!\n")
     winner = game.check_winner
     while winner is False:
-        print(game.check_winner)
         message = ""
         print("############################################\n")
         pprint(game.get_board)
