@@ -2,3 +2,5 @@ INFO:src.connect_four_game:[(5, 3, ' x'), (3, 2, ' o'), (4, 3, ' o'), (5, 4, ' o
 INFO:src.connect_four_game:[False, False, ' x', False]
 INFO:src.connect_four_game:[(5, 4, ' x'), (3, 5, ' o'), (4, 4, ' o'), (5, 3, ' o'), (3, 4, ' x'), (4, 3, ' x')]
 INFO:src.connect_four_game:[False, False, False, ' x']
+INFO:src.connect_four_game:[(5, 2, ' o'), (2, 4, ' x'), (3, 3, ' x'), (4, 2, ' x'), (5, 1, ' x')]
+INFO:src.connect_four_game:[False, False, False, ' x']

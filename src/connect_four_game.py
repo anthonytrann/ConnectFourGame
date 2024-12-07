@@ -75,7 +75,7 @@ class ConnectFourGame:
     def _diagonal_check_TLBR(self, current_board):
         counters = [" x", " o"]
         
-        for counter in counters:
+        for counter_piece in counters:
             in_a_row = 1
             winning_stack = []
             y = 0
@@ -86,16 +86,16 @@ class ConnectFourGame:
                     j = y
                     counter = current_board[i][j]
                     winning_stack.append((i, j, current_board[i][j]))
-                    for _ in range(3):
+                    for _ in range(4):
                         i += 1
                         j += 1
                         if j < len(current_board[0]) and i < len(current_board):
-                            if counter == current_board[i][j] and counter is not None:
+                            if counter == counter_piece and current_board[i][j] == counter_piece and counter is not None:
                                 in_a_row += 1
-                                winning_stack.append((i, j, current_board[i][j]))
+                                winning_stack.append((i, j, counter))
                             else:
                                 in_a_row = 1
-                                winning_stack = [(i, j, current_board[i][j])]
+                                winning_stack = [(i, j, counter)]
                             if in_a_row == 4:
                                 logger.info(winning_stack)
                                 return counter
@@ -106,7 +106,7 @@ class ConnectFourGame:
 
     def _diagonal_check_TRBL(self, current_board):
         counters = [" x", " o"]
-        for counter in counters:
+        for counter_piece in counters:
             in_a_row = 1
             winning_stack = []
             y = len(current_board[0]) - 1
@@ -117,14 +117,11 @@ class ConnectFourGame:
                     j = y
                     counter = current_board[i][j]
                     winning_stack.append((i, j, current_board[i][j]))
-                    for _ in range(3):
+                    for _ in range(4):
                         i += 1
                         j -= 1
                         if j < len(current_board[0]) and i < len(current_board):
-                            if (
-                                counter == current_board[i][j]
-                                and current_board[i][j] is not None
-                            ):
+                            if counter == counter_piece and current_board[i][j] == counter_piece and current_board[i][j] is not None:
                                 in_a_row += 1
                                 winning_stack.append((i, j, current_board[i][j]))
                             else:

@@ -198,6 +198,7 @@ class TestVerticalCheck:
         result = board._vertical_check(test_board)
         expected_winner = False
         assert expected_winner == result
+
     @mark.it("returns False when there's no winner bigger board")
     def test_vertical_check_3(self, board):
         test_board = [
@@ -211,99 +212,98 @@ class TestVerticalCheck:
         result = board._vertical_check(test_board)
         expected_winner = False
         assert expected_winner == result
-    
 
 
 class TestDiagonalCheckTLBR:
     @mark.it("returns the correct winner and the start")
     def test_diagonal_check_tlbr_1(self, board):
         test_board = [
-            ["x", None, None, None, None, None, None],
-            [None, "x", None, None, None, None, None],
-            [None, None, "x", None, None, None, None],
-            [None, None, None, "x", None, None, None],
+            [" x", None, None, None, None, None, None],
+            [None, " x", None, None, None, None, None],
+            [None, None, " x", None, None, None, None],
+            [None, None, None, " x", None, None, None],
             [None, None, None, None, None, None, None],
         ]
         result = board._diagonal_check_TLBR(test_board)
-        expected_winner = "x"
+        expected_winner = " x"
         assert expected_winner == result
 
     @mark.it("returns the correct winner if the next diagonal")
     def test_diagonal_check_tlbr_2(self, board):
         test_board = [
-            [None, "x", None, None, None, None, None],
-            [None, None, "x", None, None, None, None],
-            [None, None, None, "x", None, None, None],
-            [None, None, None, None, "x", None, None],
+            [None, " x", None, None, None, None, None],
+            [None, None, " x", None, None, None, None],
+            [None, None, None, " x", None, None, None],
+            [None, None, None, None, " x", None, None],
             [None, None, None, None, None, None, None],
         ]
         result = board._diagonal_check_TLBR(test_board)
-        expected_winner = "x"
+        expected_winner = " x"
         assert expected_winner == result
 
     @mark.it("returns the correct winner if the final first diagonal")
     def test_diagonal_check_tlbr_3(self, board):
         test_board = [
-            [None, None, None, "x", None, None, None],
-            [None, None, None, None, "x", None, None],
-            [None, None, None, None, None, "x", None],
-            [None, None, None, None, None, None, "x"],
+            [None, None, None, " x", None, None, None],
+            [None, None, None, None, " x", None, None],
+            [None, None, None, None, None, " x", None],
+            [None, None, None, None, None, None, " x"],
             [None, None, None, None, None, None, None],
         ]
         result = board._diagonal_check_TLBR(test_board)
-        expected_winner = "x"
+        expected_winner = " x"
         assert expected_winner == result
 
     @mark.it("returns the correct winner next below diagonal")
     def test_diagonal_check_tlbr_4(self, board):
         test_board = [
-            [None, None, None, "x", None, None, None],
-            ["x", None, None, None, "x", None, None],
-            [None, "x", None, None, None, "x", None],
-            [None, None, "x", None, None, None, None],
-            [None, None, None, "x", None, None, None],
+            [None, None, None, " x", None, None, None],
+            [" x", None, None, None, " x", None, None],
+            [None, " x", None, None, None, " x", None],
+            [None, None, " x", None, None, None, None],
+            [None, None, None, " x", None, None, None],
         ]
         result = board._diagonal_check_TLBR(test_board)
-        expected_winner = "x"
+        expected_winner = " x"
         assert expected_winner == result
 
     @mark.it("returns the correct winner final below diagonal")
     def test_diagonal_check_tlbr_5(self, board):
         test_board = [
-            [None, None, None, "x", None, None, None],
-            ["x", None, None, None, "x", None, None],
-            [None, "x", None, "x", None, "x", None],
-            [None, None, "x", None, "x", None, None],
-            [None, None, None, None, None, "x", None],
-            [None, None, None, None, None, None, "x"],
+            [None, None, None, " x", None, None, None],
+            [" x", None, None, None, " x", None, None],
+            [None, " x", None, " x", None, " x", None],
+            [None, None, " x", None, " x", None, None],
+            [None, None, None, None, None, " x", None],
+            [None, None, None, None, None, None, " x"],
         ]
         result = board._diagonal_check_TLBR(test_board)
-        expected_winner = "x"
+        expected_winner = " x"
         assert expected_winner == result
 
     @mark.it("returns the correct winner for 'o'")
     def test_diagonal_check_tlbr_6(self, board):
         test_board = [
-            [None, None, None, "o", None, None, None],
-            ["o", None, "x", None, "x", None, None],
-            [None, "x", None, "o", None, "0", None],
-            [None, None, "o", None, "o", None, None],
-            [None, None, None, None, None, "o", None],
-            [None, None, None, None, None, None, "o"],
+            [None, None, None, " o", None, None, None],
+            [" o", None, " x", None, " x", None, None],
+            [None, " x", None, " o", None, " o", None],
+            [None, None, " o", None, " o", None, None],
+            [None, None, None, None, None, " o", None],
+            [None, None, None, None, None, None, " o"],
         ]
         result = board._diagonal_check_TLBR(test_board)
-        expected_winner = "o"
+        expected_winner = " o"
         assert expected_winner == result
 
     @mark.it("returns false if there's no diagonal win")
     def test_diagonal_check_tlbr_7(self, board):
         test_board = [
-            [None, None, None, "o", None, None, None],
-            ["o", None, "x", None, "x", None, None],
-            [None, "x", None, "o", None, "0", None],
-            [None, None, "o", None, "o", None, None],
-            [None, None, None, None, None, "x", None],
-            [None, None, None, None, None, None, "o"],
+            [None, None, None, " o", None, None, None],
+            [" o", None, " x", None, " x", None, None],
+            [None, " x", None, " o", None, " o", None],
+            [None, None, " o", None, " o", None, None],
+            [None, None, None, None, None, " x", None],
+            [None, None, None, None, None, None, " o"],
         ]
         result = board._diagonal_check_TLBR(test_board)
         expected_winner = False
@@ -314,76 +314,76 @@ class TestDiagonalCheckTRBL:
     @mark.it("returns the correct winner from the start")
     def test_diagonal_check_trbl_1(self, board):
         test_board = [
-            [None, None, None, None, None, None, "x"],
-            [None, None, None, None, None, "x", None],
-            [None, None, None, None, "x", None, None],
-            [None, None, None, "x", None, None, None],
+            [None, None, None, None, None, None, " x"],
+            [None, None, None, None, None, " x", None],
+            [None, None, None, None, " x", None, None],
+            [None, None, None, " x", None, None, None],
             [None, None, None, None, None, None, None],
         ]
         result = board._diagonal_check_TRBL(test_board)
-        expected_winner = "x"
+        expected_winner = " x"
         assert expected_winner == result
 
     @mark.it("returns the correct winner next in line")
     def test_diagonal_check_trbl_2(self, board):
         test_board = [
-            [None, None, None, "x", None, None, None],
-            [None, None, "x", None, None, None, None],
-            [None, "x", None, None, None, None, None],
-            ["x", None, None, None, None, None, None],
+            [None, None, None, " x", None, None, None],
+            [None, None, " x", None, None, None, None],
+            [None, " x", None, None, None, None, None],
+            [" x", None, None, None, None, None, None],
             [None, None, None, None, None, None, None],
         ]
         result = board._diagonal_check_TRBL(test_board)
-        expected_winner = "x"
+        expected_winner = " x"
         assert expected_winner == result
 
     @mark.it("returns the correct winner next bottom line")
     def test_diagonal_check_trbl_3(self, board):
         test_board = [
-            [None, None, None, None, None, "x", None],
-            [None, None, None, None, None, None, "x"],
-            [None, None, None, None, None, "x", None],
-            [None, None, None, None, "x", None, None],
-            [None, None, None, "x", None, None, None],
+            [None, None, None, None, None, " x", None],
+            [None, None, None, None, None, None, " x"],
+            [None, None, None, None, None, " x", None],
+            [None, None, None, None, " x", None, None],
+            [None, None, None, " x", None, None, None],
             [None, None, None, None, None, None, None],
         ]
         result = board._diagonal_check_TRBL(test_board)
-        expected_winner = "x"
+        expected_winner = " x"
         assert expected_winner == result
 
     @mark.it("returns the correct winner final bottom line")
     def test_diagonal_check_trbl_4(self, board):
         test_board = [
             [None, None, None, None, None, None, None],
-            [None, None, None, "x", None, None, None],
-            [None, None, "x", None, None, None, None],
-            [None, "x", None, None, None, None, None],
-            ["x", None, None, None, None, None, None],
+            [None, None, None, " x", None, None, None],
+            [None, None, " x", None, None, None, None],
+            [None, " x", None, None, None, None, None],
+            [" x", None, None, None, None, None, None],
         ]
         result = board._diagonal_check_TRBL(test_board)
-        expected_winner = "x"
+        expected_winner = " x"
         assert expected_winner == result
 
     @mark.it("returns the correct winner for 'o'")
     def test_diagonal_check_trbl_5(self, board):
         test_board = [
             [None, None, None, None, None, None, None],
-            [None, None, None, "o", None, None, None],
-            [None, None, "o", None, None, None, None],
-            [None, "o", None, None, None, None, None],
-            ["o", None, None, None, None, None, None],
+            [None, None, None, " o", None, None, None],
+            [None, None, " o", None, None, None, None],
+            [None, " o", None, None, None, None, None],
+            [" o", None, None, None, None, None, None],
         ]
         result = board._diagonal_check_TRBL(test_board)
-        expected_winner = "o"
+        expected_winner = " o"
         assert expected_winner == result
 
     @mark.it("returns false when there's on diaginal win")
     def test_diagonal_check_trbl_6(self, board):
         test_board = [
             [None, None, None, None, None, None, None],
-            [None, None, None, "x", None, None, None],
-            [None, None, "x", None, None, None, None],
-            [None, "x", None, None, None, None, None],
+            [None, None, None, " x", None, None, None],
+            [None, None, " x", None, None, None, None],
+            [None, " x", None, None, None, None, None],
             [None, None, None, None, None, None, None],
         ]
         result = board._diagonal_check_TRBL(test_board)
@@ -395,11 +395,10 @@ class TestDiagonalCheckTRBL:
         test_board = [
             [None, None, None, None, None, None, None],
             [None, None, None, None, None, None, None],
-            [None, None, None,  "x", None, None, None],
-            [None,  "o", None,  "o", None, None, None],
-            [None,  "x", None,  "o", None,  "x",  "o"],
-            [None,  "o",  "x",  "o",  "x",  "o",  "x"],
-
+            [None, None, None, " x", None, None, None],
+            [None, " o", None, " o", None, None, None],
+            [None, " x", None, " o", None, " x", " o"],
+            [None, " o", " x", " o", " x", " o", " x"],
         ]
         result = board._diagonal_check_TRBL(test_board)
         expected_winner = False
@@ -426,7 +425,6 @@ class TestCheckWinner:
             [None, None, None, " o", " o", " o", " o"],
             [None, None, None, None, None, None, None],
             [None, None, None, None, None, None, None],
-
         ]
         assert board.check_winner == " o"
 
@@ -435,9 +433,8 @@ class TestCheckWinner:
             [None, None, None, None, None, None, None],
             [None, None, None, None, None, None, None],
             [None, None, None, " o", " o", " o", " o"],
-            [None, None, None,  " x", " o", " x",  " x"],
-            [None,  " x", " o",  " x", " x", " o",  " x"],
-
+            [None, None, None, " x", " o", " x", " x"],
+            [None, " x", " o", " x", " x", " o", " x"],
         ]
         assert board.check_winner == " o"
 
@@ -460,7 +457,6 @@ class TestCheckWinner:
             [None, None, " o", None, None, None, None],
             [None, None, None, None, None, None, None],
             [None, None, None, None, None, None, None],
-
         ]
         assert board.check_winner == " o"
 
@@ -483,7 +479,6 @@ class TestCheckWinner:
             [None, None, None, None, None, None, " o"],
             [None, None, None, None, None, None, None],
             [None, None, None, None, None, None, None],
-
         ]
         assert board.check_winner == " o"
 
@@ -506,7 +501,6 @@ class TestCheckWinner:
             [None, None, " o", None, None, None, None],
             [None, " o", None, None, " o", None, None],
             [None, None, None, " o", None, None, None],
-
         ]
         assert board.check_winner == " o"
 
@@ -525,10 +519,9 @@ class TestCheckWinner:
         board.board = [
             [None, None, None, None, None, None, None],
             [None, None, None, None, None, None, None],
-            [None, None, None,  " x", None, None, None],
-            [None,  " o", None,  " o", None, None, None],
-            [None,  " x", None,  " o", None,  " x",  " o"],
-            [None,  " o",  " x",  " o",  " x",  " o",  " x"],
-
+            [None, None, None, " x", None, None, None],
+            [None, " o", None, " o", None, None, None],
+            [None, " x", None, " o", None, " x", " o"],
+            [None, " o", " x", " o", " x", " o", " x"],
         ]
         assert board.check_winner is False
