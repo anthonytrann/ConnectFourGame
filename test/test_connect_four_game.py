@@ -91,17 +91,19 @@ class TestPlay:
         returned_message = board.play(3)
         assert returned_message == "This position '3' is full."
 
+
 class TestCheckBoardIsFull:
     @mark.it("returns true if the board is full")
     def test_check_board_is_full_1(self, board):
-        board._board_dict = {i : board._max_height for i in range(board._max_width)}
+        board._board_dict = {i: board._max_height + 1 for i in range(board._max_width)}
         assert board.check_board_is_full is True
 
     @mark.it("returns false if the board is not full ")
     def test_check_board_is_full_2(self, board):
-        board._board_dict = {i : board._max_height for i in range(board._max_width)}
+        board._board_dict = {i: board._max_height for i in range(board._max_width)}
         board._board_dict[0] = 0
         assert board.check_board_is_full is False
+
 
 class TestHorizontalCheck:
     @mark.it("returns the correct winner")
@@ -410,6 +412,20 @@ class TestDiagonalCheckTRBL:
             [None, " o", None, " o", None, None, None],
             [None, " x", None, " o", None, " x", " o"],
             [None, " o", " x", " o", " x", " o", " x"],
+        ]
+        result = board._diagonal_check_TRBL(test_board)
+        expected_winner = False
+        assert expected_winner == result
+
+    @mark.it("checks mixed board")
+    def test_diagonal_check_trbl_8(self, board):
+        test_board = [
+            [None, None, None, None, None, None, None],
+            [None, " o", " o", None, None, None, None],
+            [" x", " x", " o", None, None, None, None],
+            [" o", " x", " x", " o", None, None, None],
+            [" x", " o", " o", " x", None, " x", None],
+            [" x", " x", " o", " x", " o", " x", " o"],
         ]
         result = board._diagonal_check_TRBL(test_board)
         expected_winner = False

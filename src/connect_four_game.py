@@ -44,7 +44,7 @@ class ConnectFourGame:
     
     @property
     def check_board_is_full(self):
-        return all([True if value == self._max_height else False for _, value in self._board_dict.items()])
+        return all([True if value > self._max_height else False for _, value in self._board_dict.items()])
 
     def _horizontal_check(self, current_board):
         counter = -1
@@ -95,11 +95,14 @@ class ConnectFourGame:
                         j += 1
                         if j < len(current_board[0]) and i < len(current_board):
                             if counter == counter_piece and current_board[i][j] == counter_piece and counter is not None:
-                                in_a_row += 1
+                                if in_a_row == 0:
+                                    in_a_row = 2
+                                else:
+                                    in_a_row += 1
                                 winning_stack.append((i, j, counter))
                             else:
                                 in_a_row = 1
-                                winning_stack = [(i, j, counter)]
+                                winning_stack = []
                             if in_a_row == 4:
                                 logger.info(winning_stack)
                                 return counter
@@ -111,7 +114,7 @@ class ConnectFourGame:
     def _diagonal_check_TRBL(self, current_board):
         counters = [" x", " o"]
         for counter_piece in counters:
-            in_a_row = 1
+            in_a_row = 0
             winning_stack = []
             y = len(current_board[0]) - 1
             x = 0
@@ -126,11 +129,14 @@ class ConnectFourGame:
                         j -= 1
                         if j < len(current_board[0]) and i < len(current_board):
                             if counter == counter_piece and current_board[i][j] == counter_piece and current_board[i][j] is not None:
-                                in_a_row += 1
+                                if in_a_row == 0:
+                                    in_a_row = 2
+                                else:
+                                    in_a_row += 1
                                 winning_stack.append((i, j, current_board[i][j]))
                             else:
-                                in_a_row = 1
-                                winning_stack = [(i, j, current_board[i][j])]
+                                in_a_row = 0
+                                winning_stack = []
                             if in_a_row == 4:
                                 logger.info(winning_stack)
                                 return counter
