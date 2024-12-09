@@ -91,6 +91,17 @@ class TestPlay:
         returned_message = board.play(3)
         assert returned_message == "This position '3' is full."
 
+class TestCheckBoardIsFull:
+    @mark.it("returns true if the board is full")
+    def test_check_board_is_full_1(self, board):
+        board._board_dict = {i : board._max_height for i in range(board._max_width)}
+        assert board.check_board_is_full is True
+
+    @mark.it("returns false if the board is not full ")
+    def test_check_board_is_full_2(self, board):
+        board._board_dict = {i : board._max_height for i in range(board._max_width)}
+        board._board_dict[0] = 0
+        assert board.check_board_is_full is False
 
 class TestHorizontalCheck:
     @mark.it("returns the correct winner")

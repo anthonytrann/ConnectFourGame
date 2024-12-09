@@ -41,6 +41,10 @@ class ConnectFourGame:
         else:
             message = f"Incorrect position please input a number between 0 and {self._max_width}."
         return message
+    
+    @property
+    def check_board_is_full(self):
+        return all([True if value == self._max_height else False for _, value in self._board_dict.items()])
 
     def _horizontal_check(self, current_board):
         counter = -1
