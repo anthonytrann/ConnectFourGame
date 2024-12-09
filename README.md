@@ -26,3 +26,9 @@ To run the tests:
 - After you have finished running the tests make sure you deactivate the venv by typing `deactivate`.
 
 ## How to play `Connect Four` 
+To place your counter all you need to do is enter the numbers between 0 and 6 insert your counter in the desired position.
+
+Entering other characters should cause a error message to show in the terminal but should not crash the game.
+
+To win your counter must stack next to each other four times in a row. 
+The game will end once there is a winner or if the board is full and there is no winner.
