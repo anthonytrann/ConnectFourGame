@@ -6,7 +6,8 @@ def main():
     game = ConnectFourGame()
     print("\nWelcome to Connect Four!\n")
     winner = game.check_winner
-    while winner is False:
+    is_full = False
+    while winner is False and is_full is False:
         message = ""
         print("############################################\n")
         pprint(game.get_board)
@@ -19,6 +20,8 @@ def main():
         if message:
             print(message)
         winner = game.check_winner
+        is_full = game.check_board_is_full
+
     if winner is not False:
         pprint(game.get_board)
         print("   0  ,  1  ,  2  ,  3  ,  4  ,  5  ,  6  \n") 
@@ -27,6 +30,7 @@ def main():
         pprint(game.get_board)
         print("   0  ,  1  ,  2  ,  3  ,  4  ,  5  ,  6  \n") 
         print("There is no winner")
+
 
 
 def cls():
