@@ -19,9 +19,14 @@ def main():
         if message:
             print(message)
         winner = game.check_winner
-    pprint(game.get_board)
-    print("   0  ,  1  ,  2  ,  3  ,  4  ,  5  ,  6  \n") 
-    print(f"Congraulations! The winners is : {winner}")
+    if winner is not False:
+        pprint(game.get_board)
+        print("   0  ,  1  ,  2  ,  3  ,  4  ,  5  ,  6  \n") 
+        print(f"Congraulations! The winners is : {winner}")
+    else:
+        pprint(game.get_board)
+        print("   0  ,  1  ,  2  ,  3  ,  4  ,  5  ,  6  \n") 
+        print("There is no winner")
 
 
 def cls():
